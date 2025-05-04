@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "start": "node dist/server.js",
+    "migrate": "typeorm migration:run",
+    "start": "yarn migrate && node ./dist/server.js",
     "dev": "tsx ./src/server.ts",
     "watch": "yarn tsc --watch",
     "typeorm": "typeorm-ts-node-commonjs",
