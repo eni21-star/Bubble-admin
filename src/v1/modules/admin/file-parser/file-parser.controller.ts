@@ -10,7 +10,7 @@ class FileParserController {
 
     constructor(@inject(FileParserService) private fileParserService: FileParserService){}
 
-    async parseFile(req: Request, res: Response, next: NextFunction){
+    async parseFile(req: Request, res: Response, next: NextFunction): Promise<any>{
 
         try {
 

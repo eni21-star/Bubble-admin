@@ -47,7 +47,7 @@ export class ConflictError extends CustomError {
     }
 }
 
-export const errorHandler: ErrorRequestHandler = (err: unknown, req: Request, res: Response, next: NextFunction)=>{
+export const errorHandler: any = (err: unknown, req: Request, res: Response, next: NextFunction)=>{
 
     if(err instanceof CustomError ){
         const error = err as CustomError

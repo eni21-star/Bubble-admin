@@ -15,7 +15,7 @@ export const upload = multer({ dest: 'uploads/' })
 blogRouter
 .post('/new-blog', [authMiddleware, upload.array('images'), permissionsMiddleware('create_blog'), reqValidator(CreateBlogDto)], blogController.createBlog.bind(blogController))
 .put('/update-blog/:id', [authMiddleware, upload.array('images'),permissionsMiddleware('update_blog'), validateIdParams, reqValidator(UpdateeBlogDto)], blogController.updateBlog.bind(blogController) )
-.get('/blog/:id', [validateIdParams], blogController.getBlogById.bind(blogController))
+.get('/blog/:id', validateIdParams, blogController.getBlogById.bind(blogController))
 .get('/blogs', blogController.getAllBlogs.bind(blogController))
 .delete('/blog/:id', [validateIdParams, authMiddleware, permissionsMiddleware('delete_blog')], blogController.deleteBlog.bind(blogController))
 export default blogRouter

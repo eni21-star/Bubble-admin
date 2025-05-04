@@ -10,7 +10,7 @@ class RefreshTokenController {
 
     constructor(@inject(RefreshTokenService) private refreshTokenService: RefreshTokenService){}
 
-    async getAccessToken(req: Request, res: Response, next: NextFunction){
+    async getAccessToken(req: Request, res: Response, next: NextFunction):Promise<any>{
         try {
 
             const refreshToken = req.cookies['refreshToken']

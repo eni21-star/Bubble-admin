@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { RouteVersion } from "../../../config/route.config";
 
 class AppController {
-    async appController(req: Request, res: Response, next: NextFunction){
+    async appController(req: Request, res: Response, next: NextFunction):Promise<any>{
         return res.status(200).json({
             name: 'FSL-API',
             Version: `${RouteVersion.v1}`

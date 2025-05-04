@@ -6,7 +6,7 @@ export const validateIdParams = (
   req: Request,
   res: Response,
   next: NextFunction
-) => {
+): any => {
   const { id } = req.params;
 
   if (!isUUID(id)) {
