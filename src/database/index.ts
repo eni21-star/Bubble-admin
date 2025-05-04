@@ -21,7 +21,7 @@ const AppDataSource = new DataSource({
     dropSchema: false,
     logging: false,
     entities: [Admin, RefreshToken, Blog, Images, Applicants, Files, Popup, Subscribers],
-    migrations: [ process.env.NODE_ENV == 'staging' ? 'src/database/migrations/*.js' : 'src/database/migrations/*.js']
+    migrations: [ process.env.NODE_ENV == 'staging' ? 'dist/database/migrations/*.js' : 'dist/database/migrations/*.js']
 })
 
 export default AppDataSource
