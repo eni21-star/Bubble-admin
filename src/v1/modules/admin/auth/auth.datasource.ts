@@ -35,12 +35,15 @@ class AuthDatasource {
     }
 
     async findById(id: string){
-        return await adminRepo.findOne({ where: { id }})
+        return await adminRepo.findOne({ where: { id }, relations: ['blogs', 'blogs.images']})
     }
 
    async updateUser(admin: Admin){
          
-        const { password, ...rest } = await adminRepo.save(admin)
+        const existing = await adminRepo.findOneOrFail({ where: { id: admin.id } });
+
+        const toUpdate = adminRepo.merge(existing, admin);
+        const { password, ...rest } = await adminRepo.save(toUpdate);
         return rest
    }
 

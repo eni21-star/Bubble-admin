@@ -62,7 +62,14 @@ export const errorHandler: ErrorRequestHandler = (err: unknown, req: Request, re
         return res.status(400).json({ error: `Multer error: ${err.message}` });
       }
 
-    const error = err as Error
+    const error = err as any
+
+    if(error.status === 400){
+        
+        console.log(error)
+        res.status(400).json({ message: error.message})
+
+    }
     console.log(error)
     res.status(500).json({ message: 'internal server error'})
 }

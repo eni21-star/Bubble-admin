@@ -32,7 +32,9 @@ class BlogServices {
             newBlog.content = data.content
             newBlog.title = data.title
             newBlog.images = images
-             
+            newBlog.createdBy = userExist
+            userExist.blogs?.push(newBlog)
+
             const createBlog = await this.blogDatasource.newBlog(userExist, newBlog)
             return createBlog
 
@@ -54,8 +56,14 @@ class BlogServices {
             let findBlog = await this.blogDatasource.findBlog(data.id)
             if(!findBlog) throw new NotFoundError('Blog does not exist.')
             
-            const userPermitted = userExist.blogs?.includes(findBlog) 
-            if(!userPermitted || userExist.role != 'SUPERADMIN') throw new ForbiddenError('You do not have permission to do this ')
+            const userBlogs = userExist.blogs 
+
+            let userPermitted: boolean = userBlogs?.some(
+                (blog) => findBlog.createdBy?.id === userExist.id
+              ) ?? false;
+
+
+            if(!userPermitted || userExist.role != 'SUPERADMIN') throw new ForbiddenError('You do not have permission to do this')
                
             let images: any = []
             if(file.length > 0){
@@ -109,7 +117,12 @@ class BlogServices {
             const findBlog = await this.blogDatasource.findBlog(id)
             if(!findBlog) throw new NotFoundError('Blog not found.')        
             
-            const userPermitted = userExist.blogs?.includes(findBlog) 
+            const userBlogs = userExist.blogs
+
+            let userPermitted  = userBlogs?.some(
+                (blog)=> blog.id === findBlog.id
+            ) ?? false
+
             if(!userPermitted || userExist.role != 'SUPERADMIN') throw new ForbiddenError('You do not have permission to do this.')
 
             const deleteBlog = await this.blogDatasource.deleteBlog(id, findBlog)

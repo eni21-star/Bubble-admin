@@ -12,11 +12,12 @@ const imageRepo = AppDataSource.getRepository(Images)
 class BlogDatasource {
 
     async newBlog(admin: Admin, blog: Blog){
-      return await blogRepo.save(blog)
+      const { createdBy, ...rest} =  await blogRepo.save(blog)
+      return rest
     }
 
     async findBlog(id: string){
-        return await blogRepo.findOne({ where: {id}, relations:['images']})
+        return await blogRepo.findOne({ where: {id}, relations:['images', 'createdBy']})
     }
 
     async saveUpdate(blog: Blog){

@@ -18,6 +18,7 @@ import popupRouter from './v1/modules/admin/popup/popup.routes';
 import helmet from 'helmet'
 import cors from 'cors'
 import { logger } from './shared/utils/logger/logger';
+import subscribebRoute from './v1/modules/admin/subscribe/suscribe.routes';
 const app: Application = express()
 
 
@@ -44,8 +45,7 @@ app.use(`/api/${RouteVersion.v1}`, imageRouter)
 app.use(`/api/${RouteVersion.v1}`, careerRoute)
 app.use(`/api/${RouteVersion.v1}`, fileParserRouter)
 app.use(`/api/${RouteVersion.v1}`, popupRouter)
-
-
+app.use(`/api/${RouteVersion.v1}`, subscribebRoute)
 
 app.use(errorHandler)
 export default app

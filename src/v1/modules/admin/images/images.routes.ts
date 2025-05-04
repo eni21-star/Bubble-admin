@@ -7,6 +7,7 @@ import { upload } from '../blog/blog.routes'
 import { UploadImageDto } from './images.dto'
 import { authMiddleware } from '../../../../shared/middleware/auth.middleware'
 import { validateIdParams } from '../../../../shared/middleware/validate-id-params.middleware'
+import { fileValidator } from '../../../../shared/utils/file-validator.utils'
 const imageRouter = express.Router()
 
 const imageController = container.resolve(ImageController)

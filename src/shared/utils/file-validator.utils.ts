@@ -14,7 +14,6 @@ export const fileValidator = (acceptedExt: Array<string>) => {
         if(!file) throw new BadreqError('No file in request.')
     
         const fileExtension = path.extname(file.originalname)
-        console.log(fileExtension)
         if(!acceptedExt.includes(fileExtension))  throw new BadreqError('File type is invalid.')
         
         next()

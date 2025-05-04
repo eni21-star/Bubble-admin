@@ -6,6 +6,6 @@ import { container } from 'tsyringe'
 
 const healthController = container.resolve(HealthController)
 
-healthRouter.get('/health', healthController.chechHealth.bind(healthController))
+healthRouter.get('/', healthController.chechHealth.bind(healthController))
 
 export default healthRouter

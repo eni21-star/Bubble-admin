@@ -5,6 +5,6 @@ import { container } from 'tsyringe'
 
 const appController = container.resolve(AppController)
 
-appRouter.get('/app', appController.appController.bind(appController))
+appRouter.get('/', appController.appController.bind(appController))
 
 export default appRouter

@@ -20,7 +20,6 @@ async function uploadImage(file: Express.Multer.File[]) {
     return imageData
 
   } catch (error) {
-    console.error('Error uploading to Cloudinary:', error);
     throw error;
   }
 }

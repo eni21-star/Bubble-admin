@@ -7,6 +7,7 @@ import Images from "./entities/images.entities";
 import Applicants from "./entities/applicants.entities";
 import Files from "./entities/file.entities";
 import Popup from "./entities/popup.entities";
+import Subscribers from "./entities/subscribers.entities";
 
 
 const AppDataSource = new DataSource({
@@ -19,7 +20,7 @@ const AppDataSource = new DataSource({
     synchronize: false,
     dropSchema: false,
     logging: false,
-    entities: [Admin, RefreshToken, Blog, Images, Applicants, Files, Popup],
+    entities: [Admin, RefreshToken, Blog, Images, Applicants, Files, Popup, Subscribers],
     migrations: ['src/database/migrations/*.ts']
 })
 

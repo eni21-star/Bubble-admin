@@ -46,7 +46,7 @@ class InviteService {
             newAdmin.username = 'admin'
             newAdmin.role = 'ADMIN'
 
-            const createAdmin = this.authDatasource.newInvitedAdmin(newAdmin)
+            await this.authDatasource.newInvitedAdmin(newAdmin)
             // send email logic 
             return { message: 'Invitation sent', token}
 
