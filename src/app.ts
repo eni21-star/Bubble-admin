@@ -1,4 +1,4 @@
-import 'express-async-errors';
+
 import express, { Application, NextFunction, Request, Response } from 'express'
 import './shared/errors/errors'
 import { BadreqError, CustomError, errorHandler } from './shared/errors/errors'
