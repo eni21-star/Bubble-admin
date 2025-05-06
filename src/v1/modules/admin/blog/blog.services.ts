@@ -21,7 +21,7 @@ class BlogServices {
         try {
 
             const { id } = admin
-            console.log(file[0])
+           // console.log(file[0])
             const userExist = await this.authDatasource.findById(id)
             if(!userExist) throw new NotFoundError('Please create an account to proceed')
 

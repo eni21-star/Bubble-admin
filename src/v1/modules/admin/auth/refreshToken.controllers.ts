@@ -14,7 +14,7 @@ class RefreshTokenController {
         try {
 
             const refreshToken = req.cookies['refreshToken']
-            console.log(req.cookies)
+          //  console.log(req.cookies)
             if(!refreshToken) throw new UnauthorizedError('Refresh token not provided')
             
             const response = await this.refreshTokenService.getAccessToken(refreshToken)

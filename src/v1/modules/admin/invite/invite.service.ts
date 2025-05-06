@@ -14,7 +14,7 @@ class InviteService {
     async sendInvite(admin: ReqAdmin, data: InviteDto): Promise<{ message: string, token: string}>{
         
         try {
-            console.log(admin)
+           // console.log(admin)
             const{ id } = admin
             const { email } = data
 

@@ -32,6 +32,7 @@ class BlogDatasource {
             order: {
               createdAt: 'DESC', 
             },
+            relations: ['images']
           });
         return { data, total, page, lastPage: Math.ceil(total / limit) }
         }

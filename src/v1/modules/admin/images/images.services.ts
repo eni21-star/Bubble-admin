@@ -26,9 +26,7 @@ class ImageService {
             const userExist = await this.authDatasource.findById(id)
             if(!userExist) throw new NotFoundError('Please create an account to proceed')
 
-            
             const image = await uploadImage(file)
-          
            
             const response: Array<Images> = []
             for(let i =0; i< image.length; i++){

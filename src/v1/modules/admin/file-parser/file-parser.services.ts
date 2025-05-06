@@ -18,7 +18,7 @@ class FileParserService {
                 const originalName = file.originalname
                 const buffer = file.buffer
 
-                console.log(originalName)
+              //  console.log(originalName)
                 const isExcel = originalName.endsWith(".xlsx") || originalName.endsWith(".xls");
                 const isCSV = originalName.endsWith(".csv");
               
