@@ -1,5 +1,5 @@
 import admin from "firebase-admin";
-import * as serviceAccount from '../../config/firebase-sdk.json'// download from Firebase Console
+const serviceAccount = JSON.parse(Buffer.from(appConfig.services.firebase_credentials_base64 as string, "base64").toString("utf8"))
 import appConfig from "../../config/app.config";
 
 admin.initializeApp({
