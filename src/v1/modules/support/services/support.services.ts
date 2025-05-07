@@ -6,7 +6,6 @@ import SupportDatasource from "../datasource/support.datasource";
 import { ForbiddenError, NotFoundError, UnauthorizedError } from "../../../../shared/errors/errors";
 import { firebaseDB } from "../../../../shared/firebase/firebase";
 import { ReqAdmin } from "../../../../shared/types/req.types";
-import { send } from "process";
 
 @injectable()
 class SupportService {
