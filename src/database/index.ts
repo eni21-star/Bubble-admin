@@ -8,6 +8,7 @@ import Applicants from "./entities/applicants.entities";
 import Files from "./entities/file.entities";
 import Popup from "./entities/popup.entities";
 import Subscribers from "./entities/subscribers.entities";
+import Incidents from "./entities/incidents.entities";
 
 
 const AppDataSource = new DataSource({
@@ -17,10 +18,10 @@ const AppDataSource = new DataSource({
     username: appConfig.db.username,
     password: appConfig.db.password,
     database: 'postgres',
-    synchronize: false,
+    synchronize: true,
     dropSchema: false,
     logging: false,
-    entities: [Admin, RefreshToken, Blog, Images, Applicants, Files, Popup, Subscribers],
+    entities: [Admin, RefreshToken, Blog, Images, Applicants, Files, Popup, Subscribers, Incidents],
     migrations: [ process.env.NODE_ENV == 'staging' ? 'dist/database/migrations/*.js' : 'dist/database/migrations/*.js']
 })
 
