@@ -9,7 +9,7 @@ class DefaultClass {
             
             
         } catch (error) {
-            throw error
+            next(error)
         }
     }
 }

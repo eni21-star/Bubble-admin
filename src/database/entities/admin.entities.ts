@@ -48,6 +48,9 @@ class Admin {
     @Column({ type: 'boolean', default: false})
     invitationTokenUsed?: boolean
 
+    @Column({type: 'boolean', nullable: true})
+    isAvailable!: boolean 
+
     @OneToMany(()=> Images, image=> image.uploadedBy)
     imagesUploaded?: Images[]
     

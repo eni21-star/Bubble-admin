@@ -29,12 +29,18 @@ class AuthService {
             data.email = email.toLowerCase()
             logger.info(role)
 
+
             if(role == 'ADMIN') {
                 data.permissions = defaultPermissions 
+            }
+            else if (role = 'SUPPORT'){
+                data.isAvailable = true
+                data.permissions = []
             }
             else {
                 data.permissions = superAdminPermissions 
             }
+          
             const create = await this.authDatasource.newAdmin(data)
             return create
         } catch (error) {
