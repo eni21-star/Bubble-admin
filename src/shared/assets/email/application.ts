@@ -42,9 +42,9 @@ export const sendMailer = async (
     `;
 
     const mailOptions = {
-      from: 'NEW FSL APP',
+      from: 'Career Email Alert',
       to: applicantEmail,
-      subject: 'new fsl api',
+      subject: 'New Career Application', // change
       html: htmlBody,
       attachments: [
         {
