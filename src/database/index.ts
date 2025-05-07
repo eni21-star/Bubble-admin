@@ -18,7 +18,7 @@ const AppDataSource = new DataSource({
     username: appConfig.db.username,
     password: appConfig.db.password,
     database: 'postgres',
-    synchronize: true,
+    synchronize: false,
     dropSchema: false,
     logging: false,
     entities: [Admin, RefreshToken, Blog, Images, Applicants, Files, Popup, Subscribers, Incidents],
