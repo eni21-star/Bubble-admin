@@ -24,7 +24,8 @@ const appConfig = {
         cloudinary_api_secret: process.env.CLOUDINARY_API_SECRET,
         nodemailer_user: process.env.NODEMAILER_USER,
         nodemailer_password: process.env.NODEMAILER_PASSWORD,
-        nodemailer_service: process.env.NODEMAILER_SERVICE
+        nodemailer_service: process.env.NODEMAILER_SERVICE,
+        firebase_db_url: process.env.FIREBASE_DB_URL
     }
 }
 

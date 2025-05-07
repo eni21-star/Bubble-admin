@@ -9,4 +9,5 @@ export const SuccessResponse = (message: string, data?: ObjectLiteral, meta?: Ob
         data,
         meta
     }
+    
 }

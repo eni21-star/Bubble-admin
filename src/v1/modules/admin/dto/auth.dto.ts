@@ -16,11 +16,15 @@ export class RegisterDto {
     password!: string
 
     @IsString()
-    @IsIn(['ADMIN', 'SUPERADMIN'])
+    @IsIn(['ADMIN', 'SUPERADMIN', 'SUPPORT'])
     role!: string
 
     @IsOptional()
     permissions?: Array<string>
+
+    @IsOptional()
+    isAvailable?: boolean
+
 }
 
 export class LoginDto {

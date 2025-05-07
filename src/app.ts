@@ -20,6 +20,7 @@ import { logger } from './shared/utils/logger/logger';
 import subscribebRoute from './v1/modules/public/routes/suscribe.routes';
 import authRouter from './v1/modules/admin/routes/auth.routes'
 import incidentRouter from './v1/modules/public/routes/incidents.routes'
+import newTicketRouter from './v1/modules/support/routes/support.routes'
 const app: Application = express()
 
 
@@ -48,6 +49,7 @@ app.use(`/api/${RouteVersion.v1}`, fileParserRouter)
 app.use(`/api/${RouteVersion.v1}`, popupRouter)
 app.use(`/api/${RouteVersion.v1}`, subscribebRoute)
 app.use(`/api/${RouteVersion.v1}`, incidentRouter)
+app.use(`/api/${RouteVersion.v1}`, newTicketRouter)
 
 app.use(errorHandler)
 export default app
