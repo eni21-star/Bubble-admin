@@ -18,11 +18,11 @@ const AppDataSource = new DataSource({
     username: appConfig.db.username,
     password: appConfig.db.password,
     database: 'postgres',
-    synchronize: true,
+    synchronize: false,
     dropSchema: false,
     logging: false,
     entities: [Admin, RefreshToken, Blog, Images, Applicants, Files, Popup, Subscribers, Incidents],
-   // migrations: [ process.env.NODE_ENV == 'staging' ? 'dist/database/migrations/*.js' : 'dist/database/migrations/*.js']
+    migrations: [ process.env.NODE_ENV == 'staging' ? 'dist/database/migrations/*.js' : 'dist/database/migrations/*.js']
 })
 
 export default AppDataSource

@@ -1,7 +1,7 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
-export class InitSchema1746380333040 implements MigrationInterface {
-    name = 'InitSchema1746380333040'
+export class InitSchema1746628057395 implements MigrationInterface {
+    name = 'InitSchema1746628057395'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`CREATE TABLE "refresh_token" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "token" character varying NOT NULL, "tokenUsed" boolean NOT NULL DEFAULT false, "expiresAt" TIMESTAMP WITH TIME ZONE NOT NULL, "createdAt" TIMESTAMP NOT NULL DEFAULT now(), "updatedAt" TIMESTAMP NOT NULL DEFAULT now(), "adminId" uuid, CONSTRAINT "PK_b575dd3c21fb0831013c909e7fe" PRIMARY KEY ("id"))`);
@@ -12,6 +12,7 @@ export class InitSchema1746380333040 implements MigrationInterface {
         await queryRunner.query(`CREATE TABLE "files" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "file" jsonb NOT NULL, "createdAt" TIMESTAMP NOT NULL DEFAULT now(), CONSTRAINT "PK_6c16b9093a142e0e7613b04a3d9" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "popup" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "fullName" character varying NOT NULL, "email" character varying NOT NULL, "phoneNumber" character varying NOT NULL, "stateOfResidence" character varying NOT NULL, "createdAt" TIMESTAMP NOT NULL DEFAULT now(), "updatedAt" TIMESTAMP NOT NULL DEFAULT now(), CONSTRAINT "PK_cdae257395a57b3508d324d63e3" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "subscribers" ("id" SERIAL NOT NULL, "email" character varying NOT NULL, "createdAt" TIMESTAMP NOT NULL DEFAULT now(), CONSTRAINT "PK_cbe0a7a9256c826f403c0236b67" PRIMARY KEY ("id"))`);
+        await queryRunner.query(`CREATE TABLE "incidents" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "insuredName" character varying NOT NULL, "policyNumber" character varying NOT NULL, "description" text NOT NULL, "imageUrl" text NOT NULL, "createdAt" TIMESTAMP NOT NULL DEFAULT now(), CONSTRAINT "PK_ccb34c01719889017e2246469f9" PRIMARY KEY ("id"))`);
         await queryRunner.query(`ALTER TABLE "refresh_token" ADD CONSTRAINT "FK_2f8e4cf13f140da7f4f08b2bcb6" FOREIGN KEY ("adminId") REFERENCES "admin"("id") ON DELETE CASCADE ON UPDATE NO ACTION`);
         await queryRunner.query(`ALTER TABLE "images" ADD CONSTRAINT "FK_b73513a1d14c8f2908be932becc" FOREIGN KEY ("blogId") REFERENCES "blog"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`);
         await queryRunner.query(`ALTER TABLE "images" ADD CONSTRAINT "FK_46282731fc77cc4534cb79a25de" FOREIGN KEY ("uploadedById") REFERENCES "admin"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`);
@@ -25,6 +26,7 @@ export class InitSchema1746380333040 implements MigrationInterface {
         await queryRunner.query(`ALTER TABLE "images" DROP CONSTRAINT "FK_46282731fc77cc4534cb79a25de"`);
         await queryRunner.query(`ALTER TABLE "images" DROP CONSTRAINT "FK_b73513a1d14c8f2908be932becc"`);
         await queryRunner.query(`ALTER TABLE "refresh_token" DROP CONSTRAINT "FK_2f8e4cf13f140da7f4f08b2bcb6"`);
+        await queryRunner.query(`DROP TABLE "incidents"`);
         await queryRunner.query(`DROP TABLE "subscribers"`);
         await queryRunner.query(`DROP TABLE "popup"`);
         await queryRunner.query(`DROP TABLE "files"`);
