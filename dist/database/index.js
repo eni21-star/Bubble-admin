@@ -20,10 +20,10 @@ const AppDataSource = new typeorm_1.DataSource({
     username: app_config_1.default.db.username,
     password: app_config_1.default.db.password,
     database: 'postgres',
-    synchronize: true,
+    synchronize: false,
     dropSchema: false,
     logging: false,
     entities: [admin_entities_1.default, refresh_token_entities_1.default, blog_entities_1.default, images_entities_1.default, applicants_entities_1.default, file_entities_1.default, popup_entities_1.default, subscribers_entities_1.default],
-    //migrations: [ process.env.NODE_ENV == 'staging' ? 'dist/database/migrations/*.js' : 'dist/database/migrations/*.js']
+    migrations: [process.env.NODE_ENV == 'staging' ? 'dist/database/migrations/*.js' : 'dist/database/migrations/*.js']
 });
 exports.default = AppDataSource;

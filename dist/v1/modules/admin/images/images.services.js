@@ -14,11 +14,12 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 const tsyringe_1 = require("tsyringe");
 const upload_cloudinary_1 = __importDefault(require("../../../../shared/cloudinary/upload.cloudinary"));
 const images_entities_1 = __importDefault(require("../../../../database/entities/images.entities"));
-const images_datasource_1 = __importDefault(require("./images.datasource"));
+const images_datasource_1 = __importDefault(require("../datasource/images.datasource"));
 const auth_datasource_1 = __importDefault(require("../auth/auth.datasource"));
 const errors_1 = require("../../../../shared/errors/errors");
 let ImageService = class ImageService {
@@ -110,7 +111,6 @@ ImageService = __decorate([
     (0, tsyringe_1.injectable)(),
     __param(0, (0, tsyringe_1.inject)(images_datasource_1.default)),
     __param(1, (0, tsyringe_1.inject)(auth_datasource_1.default)),
-    __metadata("design:paramtypes", [images_datasource_1.default,
-        auth_datasource_1.default])
+    __metadata("design:paramtypes", [images_datasource_1.default, typeof (_a = typeof auth_datasource_1.default !== "undefined" && auth_datasource_1.default) === "function" ? _a : Object])
 ], ImageService);
 exports.default = ImageService;

@@ -14,6 +14,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 const tsyringe_1 = require("tsyringe");
 const auth_datasource_1 = __importDefault(require("../auth/auth.datasource"));
@@ -86,6 +87,6 @@ let InviteService = class InviteService {
 InviteService = __decorate([
     (0, tsyringe_1.injectable)(),
     __param(0, (0, tsyringe_1.inject)(auth_datasource_1.default)),
-    __metadata("design:paramtypes", [auth_datasource_1.default])
+    __metadata("design:paramtypes", [typeof (_a = typeof auth_datasource_1.default !== "undefined" && auth_datasource_1.default) === "function" ? _a : Object])
 ], InviteService);
 exports.default = InviteService;
