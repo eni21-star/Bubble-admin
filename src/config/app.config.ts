@@ -25,7 +25,8 @@ const appConfig = {
         nodemailer_user: process.env.NODEMAILER_USER,
         nodemailer_password: process.env.NODEMAILER_PASSWORD,
         nodemailer_service: process.env.NODEMAILER_SERVICE,
-        firebase_db_url: process.env.FIREBASE_DB_URL
+        firebase_db_url: process.env.FIREBASE_DB_URL,
+        firebase_credentials_base64: process.env.FIREBASE_CREDENTIALS_BASE64
     }
 }
 
