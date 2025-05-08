@@ -86,7 +86,7 @@ class SupportController {
             if(!data.startsWith('TICKET')) throw new BadreqError('Ticket id is of invalid format.')
             const response = await this.supportService.getTicket(data)
             return res.status(200).json(SuccessResponse('Ticket Retrieved.', response))
-            
+
         } catch (error) {
             next(error)
         }
@@ -100,6 +100,17 @@ class SupportController {
             const response = await this.supportService.getAdminTicketHistory(admin)
             return res.status(200).json(SuccessResponse('Tickets retrieved', response))
 
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    async getAllOpenTickets(req: Request, res: Response, next: NextFunction): Promise<any>{
+        try {
+            
+            const response = await this.supportService.getAllOpenTickets()
+            return res.status(200).json(SuccessResponse('Retrieved open tickets', response))
+            
         } catch (error) {
             next(error)
         }

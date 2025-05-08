@@ -173,6 +173,19 @@ class SupportService {
             throw error
         }
     }
+
+    async getAllOpenTickets(){
+        try {
+            
+            const snapshot = await firebaseDB.ref(`supportChats/`).once('value') 
+            const tickets = snapshot.val();
+            const ticketArray = Object.values(tickets).filter((ticket: any) => ticket.status === 'OPEN' && !ticket.assignedAgent );
+            return ticketArray
+            
+        } catch (error) {
+            throw error
+        }
+    }
 }
 
 export default SupportService
