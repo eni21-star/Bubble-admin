@@ -22,8 +22,8 @@ class SupportService {
             const ticketId = `TICKET_${uuidv4()}`
             const date =  Date.now()
 
-            const availableAdmin = await this.supportDatasource.findAvailableagent()
-            if(!availableAdmin) throw new NotFoundError('No available support at the moment')
+            // const availableAdmin = await this.supportDatasource.findAvailableagent()
+            // if(!availableAdmin) throw new NotFoundError('No available support at the moment')
             
             const message = {
                 [uuidv4()]: { senderId: userId, message: userMessage, timestamp: date },
@@ -34,13 +34,30 @@ class SupportService {
                 ticketId,
                 userId,
                 messages: message,
-                assignedAgent: availableAdmin.id,
+                assignedAgent: null,
                 status: 'OPEN',
                 createdAt: date
             }
 
             await firebaseDB.ref(`supportChats/${ticketId}`).set(ticket)
-            return { ticketId, availableAdminId: availableAdmin.id, userId }
+            return { ticketId, userId }
+
+        } catch (error) {
+            throw error
+        }
+    }
+
+    async assignAdmin(data: ResolveTicketDto, admin: ReqAdmin ){
+
+        try {
+
+            const { ticketId } = data
+            const { id } = admin
+            const snapshot = await firebaseDB.ref(`supportChats/${ticketId}`).once('value')
+            if(!snapshot.val() || snapshot.val().status !== 'OPEN') throw new NotFoundError('Ticket does not exist or has been closed.')
+            if(snapshot.val().assignedAgent) throw new ForbiddenError('An agent has already been assigned to this Ticket.')
+            
+            await firebaseDB.ref(`supportChats/${ticketId}`).update({ assignedAgent: id})
 
         } catch (error) {
             throw error
@@ -54,7 +71,6 @@ class SupportService {
             const date = Date.now()
             const { ticketId } = data
             const adminExist = await this.authDatasource.findById(id)
-            console.log(adminExist?.isAvailable)
             if(!adminExist) throw new NotFoundError('Admin does not exist, please create an account')
             
             
@@ -85,7 +101,7 @@ class SupportService {
 
             const snapshot = await firebaseDB.ref(`supportChats/${ticketId}`).once('value')
             const assignedAgent = snapshot.val().assignedAgent
-            if(snapshot.val().status != 'OPEN') throw new ForbiddenError('Ticket is not opened.')
+            if(snapshot.val().status != 'OPEN') throw new ForbiddenError('Ticket is not open.')
 
             await firebaseDB.ref(`supportChats/${ticketId}/messages`).update(message)
         } catch (error) {
@@ -116,12 +132,13 @@ class SupportService {
         }
     }
 
-    async getTicket(reqBody: ResolveTicketDto){
+    async getTicket(ticketId: string){
         try {
 
-            const { ticketId } = reqBody
+            console.log(ticketId)
             const snapshot = await firebaseDB.ref(`supportChats/${ticketId}`).once('value')
             if(!snapshot) throw new NotFoundError('Ticket does not exist')
+            console.log(snapshot.val().messages)
             const rawMessages = snapshot.val().messages
 
             const data =  Object.entries(rawMessages)
@@ -133,7 +150,24 @@ class SupportService {
                };
              });
 
-            return rawMessages
+            return data
+
+        } catch (error) {
+            throw error
+        }
+    }
+
+    async getAdminTicketHistory(admin: ReqAdmin){
+        try {
+            
+            const { id } = admin
+            const adminExist = await this.authDatasource.findById(id)
+            if(!adminExist) throw new NotFoundError('Admin does not exist, please create an account')
+
+                const snapshot = await firebaseDB.ref(`supportChats/`).once('value')
+                const tickets = snapshot.val();
+                const ticketArray = Object.values(tickets).filter((ticket: any) => ticket.assignedAgent === id);
+            return ticketArray
 
         } catch (error) {
             throw error

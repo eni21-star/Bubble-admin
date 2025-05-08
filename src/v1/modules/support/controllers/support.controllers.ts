@@ -5,6 +5,7 @@ import SupportService from "../services/support.services"
 import { SuccessResponse } from "../../../../shared/utils/response.utils"
 import { firebaseDB } from "../../../../shared/firebase/firebase"
 import { ReqAdmin } from "../../../../shared/types/req.types"
+import { BadreqError } from "../../../../shared/errors/errors"
 
 @injectable()
 class SupportController { 
@@ -21,6 +22,22 @@ class SupportController {
         } catch (error) {
             next(error)
         }
+    }
+
+    async assignAdmin(req: Request, res: Response, next: NextFunction): Promise<any>{
+
+        try {
+            
+            const admin = (req as any).admin as ReqAdmin
+            const data = req.body as ResolveTicketDto
+
+            await this.supportService.assignAdmin(data, admin)
+            return res.status(200).json(SuccessResponse('Admin assigned.'))
+
+        } catch (error) {
+            next(error)
+        }
+
     }
 
     async adminReplyToTicket(req: Request, res: Response, next: NextFunction): Promise<any>{
@@ -64,9 +81,25 @@ class SupportController {
     async getTicket(req: Request, res: Response, next: NextFunction): Promise<any>{
         try {
 
-            const data = req.body as ResolveTicketDto
+            const data = String(req.params.id)
+            console.log(data)
+            if(!data.startsWith('TICKET')) throw new BadreqError('Ticket id is of invalid format.')
             const response = await this.supportService.getTicket(data)
             return res.status(200).json(SuccessResponse('Ticket Retrieved.', response))
+            
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    async getAdminTicketHistory(req: Request, res: Response, next: NextFunction): Promise<any>{
+
+        try {
+            
+            const admin = (req as any).admin as ReqAdmin
+            const response = await this.supportService.getAdminTicketHistory(admin)
+            return res.status(200).json(SuccessResponse('Tickets retrieved', response))
+
         } catch (error) {
             next(error)
         }
