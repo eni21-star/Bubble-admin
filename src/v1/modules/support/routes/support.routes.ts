@@ -16,4 +16,6 @@ newTicketRouter
 .get(`/support/get-ticket/:id`, supportController.getTicket.bind(supportController))
 .post('/support/assign-admin', [authMiddleware, reqValidator(ResolveTicketDto)], supportController.assignAdmin.bind(supportController))
 .get('/support/get-tickets', authMiddleware, supportController.getAdminTicketHistory.bind(supportController))
+.get('/support/open-tickets', supportController.getAllOpenTickets.bind(supportController))
+
 export default newTicketRouter
