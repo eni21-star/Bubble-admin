@@ -33,7 +33,7 @@ class AuthService {
             if(role == 'ADMIN') {
                 data.permissions = defaultPermissions 
             }
-            else if (role = 'SUPPORT'){
+            else if (role == 'SUPPORT'){
                 data.isAvailable = true
                 data.permissions = []
             }
