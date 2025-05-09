@@ -17,7 +17,7 @@ class InviteService {
         try {
            // console.log(admin)
             const{ id } = admin
-            const { email } = data
+            const { email, role } = data
 
             const userExist = await this.authDatasource.findById(id)
             if(!userExist) throw new UnauthorizedError('Please create an account to proceed.')
@@ -44,8 +44,8 @@ class InviteService {
             newAdmin.password = 'admin'
             newAdmin.invitedBy = userExist
             newAdmin.invitationToken = token
+            newAdmin.role = role
             newAdmin.username = 'admin'
-            newAdmin.role = 'ADMIN'
 
             await this.authDatasource.newInvitedAdmin(newAdmin)
             // send email logic 

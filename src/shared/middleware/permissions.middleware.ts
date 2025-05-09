@@ -11,7 +11,6 @@ const permissionsMiddleware = (permission: string)=>{
         
         const admin = (req as any).admin as ReqAdmin
         const { permissions } = admin
-
         if(!permissions.includes(permission)) { 
             throw new ForbiddenError('You do not have permission to this function.') 
         }

@@ -10,6 +10,12 @@ class Subscribers {
     @Column({ type: 'varchar'})
     email!: string
 
+    @Column({ type: 'varchar'})
+    firstName!: string
+
+    @Column({ type: 'varchar'})
+    lastName!: string
+
     @CreateDateColumn()
     createdAt!: Date
 }
