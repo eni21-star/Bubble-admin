@@ -1,10 +1,14 @@
-import { IsEmail, IsString, IsStrongPassword, Length } from "class-validator";
+import { IsEmail, IsIn, IsString, IsStrongPassword, Length } from "class-validator";
 
 
 export class InviteDto {
 
     @IsEmail()
     email!: string
+
+    @IsString()
+    @IsIn(['ADMIN', 'SUPPORT'])
+    role!: string
 
 }
 
