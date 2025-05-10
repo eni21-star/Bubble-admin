@@ -30,12 +30,7 @@ const AppDataSource = new DataSource({
     Popup,
     Subscribers,
     Incidents,
-  ],
-  migrations: [
-    process.env.NODE_ENV == "staging"
-      ? "dist/database/migrations/*.js"
-      : "dist/database/migrations/*.js",
-  ],
+  ]
 });
 
 export default AppDataSource;
