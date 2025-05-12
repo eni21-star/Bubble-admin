@@ -32,7 +32,7 @@ app.use(helmet()).use(
       "http://localhost:3001",
       "https://fsl-admin.vercel.app",
       "https://fsl.ng",
-      "http://u000ckskw408ssgwcoc400o4.188.166.164.40.sslip.io/",
+      "http://u000ckskw408ssgwcoc400o4.188.166.164.40.sslip.io",
     ],
   })
 );
