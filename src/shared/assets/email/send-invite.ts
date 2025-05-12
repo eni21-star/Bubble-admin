@@ -29,7 +29,7 @@ export const sendInvitationEmail = async ({
     <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
       <p>Dear,</p>
       <p>
-        You’ve been invited to join <strong>FSL Capital Limited</strong> as a <strong>${role}</strong>.
+        You’ve been invited to join <strong>FSL Capital Limited</strong> as <strong>${role}</strong>.
       </p>
       <p>
         Click the link below to accept your invitation and set up your account:
