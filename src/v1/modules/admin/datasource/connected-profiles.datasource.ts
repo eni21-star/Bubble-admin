@@ -7,7 +7,7 @@ const adminRepo = AppDataSource.getRepository(Admin)
 @injectable()
 class ConnectedProfileDatasource {
     async getConnectedProfiles(admin: Admin){
-        return await adminRepo.find({ where: {invitedBy: admin}})
+        return await adminRepo.find({ where: { invitedBy: { id: admin.id } } })
     }
 
 }
