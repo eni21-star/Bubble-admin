@@ -7,6 +7,7 @@ import Admin from "../../../../database/entities/admin.entities"
 import { bcryptHash } from "../../../../shared/utils/hash.utils"
 import AuthDatasource from "../datasource/auth.datasource"
 import { defaultPermissions } from "../../../../config/permissions.config"
+import sendInvitationEmail from "../../../../shared/assets/email/send-invite"
 
 
 @injectable()
@@ -34,7 +35,8 @@ class InviteService {
                 const token = generateCryptoToken()
                 invitationSent.invitationToken = token
                 const updateTokenInDb = this.authDatasource.updateUser(invitationSent)
-                // emailLogic emailToken(email, token)
+                const url = `https://fsl-admin.vercel.app/onboarding/${token}`
+                await sendInvitationEmail({ inviteeEmail: email, invitationLink: url, role})
                 return { message: 'Invitation Resent', token}
             }
             
@@ -48,7 +50,8 @@ class InviteService {
             newAdmin.username = 'admin'
 
             await this.authDatasource.newInvitedAdmin(newAdmin)
-            // send email logic 
+            const url = `https://fsl-admin.vercel.app/onboarding/${token}`
+            await sendInvitationEmail({ inviteeEmail: email, invitationLink: url, role})
             return { message: 'Invitation sent', token}
 
             

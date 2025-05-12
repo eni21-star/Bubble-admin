@@ -17,6 +17,7 @@ class ConnectedProfileServices {
             
             const { id }= admin
             const userExist = await this.authDatasource.findById(id)
+            console.log(userExist)
             if(!userExist) throw new NotFoundError("user does not exist")
             if(userExist.role != 'SUPERADMIN') throw new ForbiddenError('You do not have permission to this function')
 
