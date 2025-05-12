@@ -3,7 +3,9 @@ import { injectable, inject } from "tsyringe";
 import { ReqAdmin } from "../../../../shared/types/req.types";
 import { SuccessResponse } from "../../../../shared/utils/response.utils";
 import BlogServices from "../services/blog.services";
-import { CreateBlogDto, UpdateeBlogDto } from "../dto/blog.dto";
+import { CreateBlogDto, GetBlogBySubsidiaryDto, UpdateeBlogDto } from "../dto/blog.dto";
+import { subSidiaryArray } from "../../../../config/subsidiaries.config";
+import { BadreqError } from "../../../../shared/errors/errors";
 
 @injectable()
 class BlogController {
@@ -69,6 +71,20 @@ class BlogController {
             const response = await this.blogService.getAllBlogs({page, limit})
             return res.status(200).json(SuccessResponse('Fetched Blog Successfully.', response))
             
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    async getBlogsBySubsidiary(req: Request, res: Response, next: NextFunction): Promise<any>{
+
+        try {
+
+            const data = req.params.id as string
+            if(!subSidiaryArray.includes(data.toString())) throw new BadreqError('Subsidiary is invalid')
+            const response = await this.blogService.getBlogsBySubsidiary(data)
+            return res.status(200).json(SuccessResponse('Blogs Retrieved.', response))
+
         } catch (error) {
             next(error)
         }

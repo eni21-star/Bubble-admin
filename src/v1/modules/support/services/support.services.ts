@@ -27,7 +27,7 @@ class SupportService {
             
             const message = {
                 [uuidv4()]: { senderId: userId, message: userMessage, timestamp: date },
-                [uuidv4()]: {senderId: 'system', message: 'An agent will respond shortly.', timestamp: date}
+                [uuidv4()]: {senderId: 'system', message: null, timestamp: date}
             }
 
             const ticket = {

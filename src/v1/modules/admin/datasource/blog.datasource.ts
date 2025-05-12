@@ -37,6 +37,10 @@ class BlogDatasource {
         return { data, total, page, lastPage: Math.ceil(total / limit) }
         }
 
+    async getBlogsBySubsidiary(subsidiary: string){
+      return await blogRepo.find({ where: { subsidiary}})
+    }
+
     async deleteBlog(id: string, blog: Blog){
       
        await imageRepo.delete({blog})
