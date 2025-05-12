@@ -1,4 +1,5 @@
-import { IsAlpha, IsNotEmpty, IsOptional, IsString, MinLength } from "class-validator";
+import { IsAlpha, IsIn, IsNotEmpty, IsOptional, IsString, MinLength } from "class-validator";
+import { subSidiaryArray } from "../../../../config/subsidiaries.config";
 
 
 
@@ -12,6 +13,9 @@ export class CreateBlogDto {
     @MinLength(50, { message: 'Content must be at least 50 characters long' })
     content!: string;
 
+    @IsIn(['FSL_ASSET_MANAGEMENT', 'FSL_INSURANCE_BROKERS', 'FSL_MANAGEMENT_SERVICES', 'FSL_FINANCE', 'FSL_REGISTRARS'])
+    @IsNotEmpty()
+    subsidiary!: string
 }
 
 
@@ -26,5 +30,13 @@ export class UpdateeBlogDto {
     @IsOptional()
   //  @MinLength(50, { message: 'Content must be at least 50 characters long' })
     content?: string;
+
+}
+
+export class GetBlogBySubsidiaryDto {
+
+    @IsIn(subSidiaryArray)
+    @IsNotEmpty()
+    subsidiary!: string
 
 }
