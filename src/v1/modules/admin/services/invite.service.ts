@@ -35,7 +35,7 @@ class InviteService {
                 const token = generateCryptoToken()
                 invitationSent.invitationToken = token
                 const updateTokenInDb = this.authDatasource.updateUser(invitationSent)
-                const url = `https://fsl-admin.vercel.app/onboarding/${token}`
+                const url = `https://fsl-admin.vercel.app/onboarding?token=${token}`
                 await sendInvitationEmail({ inviteeEmail: email, invitationLink: url, role})
                 return { message: 'Invitation Resent', token}
             }
@@ -50,7 +50,7 @@ class InviteService {
             newAdmin.username = 'admin'
 
             await this.authDatasource.newInvitedAdmin(newAdmin)
-            const url = `https://fsl-admin.vercel.app/onboarding/${token}`
+            const url = `https://fsl-admin.vercel.app/onboarding?token=${token}`
             await sendInvitationEmail({ inviteeEmail: email, invitationLink: url, role})
             return { message: 'Invitation sent', token}
 
