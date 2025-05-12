@@ -7,6 +7,7 @@ import Blog from "../../../../database/entities/blog.entities";
 import Images from "../../../../database/entities/images.entities";
 import AuthDatasource from "../datasource/auth.datasource";
 import BlogDatasource from "../datasource/blog.datasource";
+import { subsidiaries } from "../../../../config/subsidiaries.config";
 
 @injectable()
 class BlogServices {
@@ -21,18 +22,17 @@ class BlogServices {
         try {
 
             const { id } = admin
-           // console.log(file[0])
             const userExist = await this.authDatasource.findById(id)
             if(!userExist) throw new NotFoundError('Please create an account to proceed')
 
             const images = await uploadImage(file) as any
-
-
+                   
             const newBlog = new Blog()
             newBlog.content = data.content
             newBlog.title = data.title
             newBlog.images = images
             newBlog.createdBy = userExist
+            newBlog.subsidiary = data.subsidiary
             userExist.blogs?.push(newBlog)
 
             const createBlog = await this.blogDatasource.newBlog(userExist, newBlog)
@@ -102,6 +102,15 @@ class BlogServices {
             const { page, limit } = data
             return await this.blogDatasource.getAllBlogs(page, limit)
 
+        } catch (error) {
+            throw error
+        }
+    }
+
+    async getBlogsBySubsidiary(subsidiary:  string){
+        
+        try {
+            return await this.blogDatasource.getBlogsBySubsidiary(subsidiary)
         } catch (error) {
             throw error
         }
