@@ -13,7 +13,7 @@ export class CreateBlogDto {
     @MinLength(50, { message: 'Content must be at least 50 characters long' })
     content!: string;
 
-    @IsIn(['FSL_ASSET_MANAGEMENT', 'FSL_INSURANCE_BROKERS', 'FSL_MANAGEMENT_SERVICES', 'FSL_FINANCE', 'FSL_REGISTRARS'])
+    @IsIn(subSidiaryArray)
     @IsNotEmpty()
     subsidiary!: string
 }

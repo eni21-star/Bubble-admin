@@ -2,8 +2,8 @@ import express from 'express'
 import { authMiddleware } from '../../../../shared/middleware/auth.middleware'
 import multer from 'multer';
 import { container } from 'tsyringe';
-import { fileValidator } from '../../../../shared/utils/file-validator.utils';
-import FileParserController from '../controllers/file-parser.controller';
+import { fileValidator } from '../../../../shared/middleware/file-validator.utils';
+import FileParserController from '../controllers/file-parser.controllers';
 
 const fileParserController = container.resolve(FileParserController)
 const storage = multer.memoryStorage();

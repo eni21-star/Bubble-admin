@@ -35,7 +35,7 @@ class AuthDatasource {
     }
 
     async findById(id: string){
-        return await adminRepo.findOne({ where: { id }, relations: ['blogs', 'blogs.images']})
+        return await adminRepo.findOne({ where: { id }, relations: ['blogs', 'blogs.images', 'reports']})
     }
 
    async updateUser(admin: Admin){

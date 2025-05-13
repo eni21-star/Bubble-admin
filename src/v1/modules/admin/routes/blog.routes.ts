@@ -11,7 +11,8 @@ import BlogController from '../controllers/blog.controllers'
 
 const blogController = container.resolve(BlogController)
 
-export const upload = multer({ dest: 'uploads/' })
+const storage = multer.memoryStorage()
+export const upload = multer({ storage , limits: { fileSize: 5 * 1024 * 1024 }})
 blogRouter
 .post('/new-blog', [authMiddleware, upload.array('images'), permissionsMiddleware('create_blog'), reqValidator(CreateBlogDto)], blogController.createBlog.bind(blogController))
 .put('/update-blog/:id', [authMiddleware, upload.array('images'),permissionsMiddleware('update_blog'), validateIdParams, reqValidator(UpdateeBlogDto)], blogController.updateBlog.bind(blogController) )

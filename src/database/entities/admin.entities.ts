@@ -3,6 +3,7 @@ import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGenerate
 import RefreshToken from './refresh-token.entities';
 import Blog from './blog.entities';
 import Images from './images.entities';
+import Reports from './reports.entities';
 
 enum AdminRoles {
     admin='ADMIN',
@@ -54,6 +55,9 @@ class Admin {
     @OneToMany(()=> Images, image=> image.uploadedBy)
     imagesUploaded?: Images[]
     
+    @OneToMany(()=> Reports, reports => reports.createdBy, {nullable: true})
+    reports!: [Reports]
+
     @CreateDateColumn()
     dateCreated!: Date;
   
