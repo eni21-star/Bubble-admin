@@ -11,7 +11,7 @@ class PopupStatusDatasource {
   }
 
   async fetchStatusDetail(): Promise<PopupStatus | null> {
-    return await popupStatusRepo.findOne();
+    return await popupStatusRepo.findOne({ where: {} });
   }
 }
 
