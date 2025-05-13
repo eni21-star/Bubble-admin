@@ -33,7 +33,6 @@ class ProfileController {
   ): Promise<any> {
     try {
       const { id } = req.params;
-
       await this.profileServices.deleteProfile(id);
       return res.status(200).json(SuccessResponse("Profile deleted retrieved"));
     } catch (error) {
