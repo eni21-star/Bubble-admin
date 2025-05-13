@@ -42,8 +42,5 @@ export class UpdatePopupDto {
     @IsOptional()
     stateOfResidence?: string
 
-    @IsBoolean()
-    @IsOptional()
-    isEnabled?: boolean
 
 }

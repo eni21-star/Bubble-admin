@@ -18,7 +18,7 @@ class PopupDatasource {
     }
 
     async findPopupById(id: string){
-        return await popupRepo.findOne({ where: {id, isEnabled: true}})
+        return await popupRepo.findOne({ where: {id}})
     }
 
     async updatePopup(data: Popup){
