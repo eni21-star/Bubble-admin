@@ -1,7 +1,7 @@
 import { inject, injectable } from "tsyringe";
 import IncidentDatasource from "../datasource/incidents.datasource";
 import { IncidentDto } from "../dto/incidents.dto";
-import uploadImage from "../../../../shared/cloudinary/upload.cloudinary";
+import uploadImage from "../../../../shared/cloudinary/upload-image.cloudinary";
 import sendIncidentReport from "../../../../shared/assets/email/incidents.email";
 import Incidents from "../../../../database/entities/incidents.entities";
 

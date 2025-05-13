@@ -38,7 +38,7 @@ class BlogDatasource {
         }
 
     async getBlogsBySubsidiary(subsidiary: string){
-      return await blogRepo.find({ where: { subsidiary}})
+      return await blogRepo.find({ where: { subsidiary}, relations: ['images', 'createdBy']})
     }
 
     async deleteBlog(id: string, blog: Blog){

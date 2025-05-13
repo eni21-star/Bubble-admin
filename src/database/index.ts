@@ -9,6 +9,7 @@ import Files from "./entities/file.entities";
 import Popup from "./entities/popup.entities";
 import Subscribers from "./entities/subscribers.entities";
 import Incidents from "./entities/incidents.entities";
+import Reports from "./entities/reports.entities";
 
 const AppDataSource = new DataSource({
   type: "postgres",
@@ -30,6 +31,7 @@ const AppDataSource = new DataSource({
     Popup,
     Subscribers,
     Incidents,
+    Reports
   ]
 });
 

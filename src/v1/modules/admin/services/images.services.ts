@@ -1,5 +1,5 @@
 import { inject, injectable } from "tsyringe";
-import uploadImage from "../../../../shared/cloudinary/upload.cloudinary";
+import uploadImage from "../../../../shared/cloudinary/upload-image.cloudinary";
 import Images from "../../../../database/entities/images.entities";
 import { UploadImageDto } from "../dto/images.dto";
 import ImageDatasource from "../datasource/images.datasource";

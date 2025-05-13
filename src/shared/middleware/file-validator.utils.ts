@@ -10,11 +10,17 @@ export const fileValidator = (acceptedExt: Array<string>) => {
 
     try {
 
-        const file = req.file as Express.Multer.File
+
+        const file = req.files as Express.Multer.File[]
+
         if(!file) throw new BadreqError('No file in request.')
-    
-        const fileExtension = path.extname(file.originalname)
-        if(!acceptedExt.includes(fileExtension))  throw new BadreqError('File type is invalid.')
+
+        for( let i= 0; i< file.length; i++){
+            const fileExtension = path.extname(file[i].originalname)
+            if(!acceptedExt.includes(fileExtension)) {
+                throw new BadreqError('File type is invalid.')
+            } 
+        }        
         
         next()
         
