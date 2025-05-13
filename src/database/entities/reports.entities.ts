@@ -17,6 +17,9 @@ class Reports {
     @Column({type: 'varchar'})
     section!: string
 
+    @Column({type: 'varchar'})
+    type!: string
+
     @ManyToOne(()=> Admin, admin => admin.reports, { cascade: true, onDelete: 'CASCADE'} )
     createdBy!: Admin
 

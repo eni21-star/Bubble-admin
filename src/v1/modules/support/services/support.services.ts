@@ -135,10 +135,9 @@ class SupportService {
     async getTicket(ticketId: string){
         try {
 
-            console.log(ticketId)
+        
             const snapshot = await firebaseDB.ref(`supportChats/${ticketId}`).once('value')
             if(!snapshot) throw new NotFoundError('Ticket does not exist')
-            console.log(snapshot.val().messages)
             const rawMessages = snapshot.val().messages
 
             const data =  Object.entries(rawMessages)

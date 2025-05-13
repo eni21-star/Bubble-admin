@@ -7,7 +7,7 @@ import cloudinary from './index';
 async function uploadFile(file: Express.Multer.File[]) {
   try {
 
-    const imageData = []
+    const fileData = []
 
     for(let i=0; i< file.length; i++){
         const stream = bufferToStream(file[i].buffer)
@@ -27,11 +27,11 @@ async function uploadFile(file: Express.Multer.File[]) {
             stream.pipe(uploadStream);
           });
       
-          imageData.push({ fileUrl: result.secure_url });
+          fileData.push({ fileUrl: result.secure_url });
 
     }
 
-    return imageData
+    return fileData
 
   } catch (error) {
     throw error;
