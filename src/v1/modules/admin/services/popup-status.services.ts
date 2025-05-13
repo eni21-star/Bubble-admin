@@ -5,6 +5,7 @@ import AuthDatasource from "../datasource/auth.datasource";
 import PopupStatusDto from "../dto/popup-status.dto";
 import PopupStatusDatasource from "../datasource/popup-status.datasource";
 import Popup from "../../../../database/entities/popup.entities";
+import PopupStatus from "../../../../database/entities/popup-status.entities";
 
 @injectable()
 class PopupStatusServices {
@@ -21,7 +22,16 @@ class PopupStatusServices {
       const userExist = await this.authDatasource.findById(id);
       if (!userExist) throw new NotFoundError("User does not exist.");
 
-      return await this.popupStatusDatasource.changeStatus(status);
+      const popupExist = await this.popupStatusDatasource.popupStatusExist()
+      
+      if(popupExist.length > 0){
+        return await this.popupStatusDatasource.changeStatus(status);
+      }
+
+      const newPopup = new PopupStatus
+      newPopup.isEnabled = status
+      return await this.popupStatusDatasource.savePopupStatus(newPopup)
+      
     } catch (error) {
       throw error;
     }

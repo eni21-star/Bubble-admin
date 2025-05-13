@@ -10,6 +10,14 @@ class PopupStatusDatasource {
     return await popupStatusRepo.update({}, { isEnabled: status });
   }
 
+  async popupStatusExist(){
+    return await popupStatusRepo.find()
+  }
+
+  async savePopupStatus(popup: PopupStatus){
+    return await popupStatusRepo.save(popup)
+  }
+
   async fetchStatusDetail(): Promise<PopupStatus | null> {
     return await popupStatusRepo.findOne({ where: {} });
   }
