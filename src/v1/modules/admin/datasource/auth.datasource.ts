@@ -57,6 +57,10 @@ class AuthDatasource {
     return rest;
   }
 
+  async findInviteByToken(token: string){
+    return await adminRepo.findOne({ where: { invitationToken: token} })
+   }
+
   async deletAdminById(id: string) {
     return await adminRepo.delete(id);
   }
