@@ -37,7 +37,7 @@ class PopupServices {
             
             
             const { id } = admin
-            const { fullName, email, stateOfResidence, phoneNumber, isEnabled} = data
+            const { fullName, email, stateOfResidence, phoneNumber} = data
             const userExist = await this.authDatasource.findById(id)
             if(!userExist) throw new NotFoundError('user does not exist. Please create an account')
 
@@ -48,7 +48,7 @@ class PopupServices {
             popupExist.fullName = fullName ? fullName : popupExist.fullName
             popupExist.phoneNumber = phoneNumber ? phoneNumber : popupExist.phoneNumber
             popupExist.stateOfResidence = stateOfResidence ? stateOfResidence : popupExist.stateOfResidence
-            popupExist.isEnabled = isEnabled ? isEnabled : popupExist.isEnabled
+
 
             return await this.popupDatasource.updatePopup(popupExist)
 
