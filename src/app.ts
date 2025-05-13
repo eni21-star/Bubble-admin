@@ -22,6 +22,8 @@ import incidentRouter from "./v1/modules/public/routes/incidents.routes";
 import newTicketRouter from "./v1/modules/support/routes/support.routes";
 import connectedProfileRoute from "./v1/modules/admin/routes/connected-profiles.routes";
 import reportsRouter from "./v1/modules/admin/routes/reports.routes";
+import popupStatusRouter from "./v1/modules/admin/routes/popup-status.route";
+import profileRouter from "./v1/modules/admin/routes/profile.routes";
 const app: Application = express();
 
 app.use(express.json());
@@ -54,6 +56,8 @@ app.use(`/api/${RouteVersion.v1}`, incidentRouter);
 app.use(`/api/${RouteVersion.v1}`, newTicketRouter);
 app.use(`/api/${RouteVersion.v1}`, connectedProfileRoute);
 app.use(`/api/${RouteVersion.v1}`, reportsRouter);
+app.use(`/api/${RouteVersion.v1}`, popupStatusRouter);
+app.use(`/api/${RouteVersion.v1}`, profileRouter);
 
 app.use(errorHandler);
 export default app;

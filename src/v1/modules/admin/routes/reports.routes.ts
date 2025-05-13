@@ -18,6 +18,5 @@ const reportsController = container.resolve(ReportsController)
 reportsRouter
 .post('/new-report', [authMiddleware, upload.array('file'), fileValidator(['.pdf', '.docx', '.csv', '.xlsx', '.xls', '.jpg', '.png','.jpeg']), permissionsMiddleware('upload_report'), reqValidator(ReportsDto) ], reportsController.newReport.bind(reportsController))
 .delete('/delete-report/:id', [authMiddleware, permissionsMiddleware('delete_report'), validateIdParams], reportsController.deleteReport.bind(reportsController))
-
-
+.get('/get-reports', reportsController.getReports.bind(reportsController))
 export default reportsRouter

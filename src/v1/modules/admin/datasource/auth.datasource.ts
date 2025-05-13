@@ -38,6 +38,10 @@ class AuthDatasource {
         return await adminRepo.findOne({ where: { id }, relations: ['blogs', 'blogs.images', 'reports']})
     }
 
+    async findByIdProfile(id: string){
+        return await adminRepo.findOne({ where: { id }, relations: ['blogs', 'blogs.images', 'reports', 'invitedUsers', 'imagesUploaded']})
+    }
+
    async updateUser(admin: Admin){
          
         const existing = await adminRepo.findOneOrFail({ where: { id: admin.id } });

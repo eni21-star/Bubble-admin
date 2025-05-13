@@ -13,8 +13,8 @@ const popupController = container.resolve(PopupController)
 popupRouter
 .post('/popup/create', reqValidator(CreatePopupDto), popupController.createPopup.bind(popupController))
 .put('/popup/update/:id', [authMiddleware, permissionsMiddleware('update_popup'), reqValidator(UpdatePopupDto)], popupController.updatePopup.bind(popupController))
-.get('/popups', popupController.getAllPopups.bind(popupController))
+//.get('/popups', popupController.getAllPopups.bind(popupController))
 .get('/popup/:id', validateIdParams, popupController.getPopupById.bind(popupController))
-.delete('/popup/delete/:id', [authMiddleware, permissionsMiddleware('delete_popup'), validateIdParams], popupController.deletePopup.bind(popupController))
+//.delete('/popup/delete/:id', [authMiddleware, permissionsMiddleware('delete_popup'), validateIdParams], popupController.deletePopup.bind(popupController))
 
 export default popupRouter

@@ -13,6 +13,21 @@ class ReportsDatasource {
         return await reportsRepo.findOne({ where: { id }, relations: ['createdBy']})
     }
 
+    async getReports(type: string, page: number, limit: number){
+
+      const [data, total] = await reportsRepo.findAndCount({
+            skip: (page - 1) * limit,
+            where: {
+                type
+            },
+            take: limit,
+            order: {
+              createdAt: 'DESC', 
+            }
+          });
+        return { data, total, page, lastPage: Math.ceil(total / limit) }
+
+    }
     async deleteReport(id: string, admin: Admin){
          return await reportsRepo.delete(id)
     }
