@@ -6,30 +6,34 @@ import PopupStatusDto from "../dto/popup-status.dto";
 import PopupStatusDatasource from "../datasource/popup-status.datasource";
 import Popup from "../../../../database/entities/popup.entities";
 
-
-
 @injectable()
 class PopupStatusServices {
-    constructor(
-        @inject(AuthDatasource) private authDatasource: AuthDatasource,
-        @inject(PopupStatusDatasource) private popupStatusDatasource: PopupStatusDatasource){}
-    async changeStatus(data: PopupStatusDto, admin: ReqAdmin){
+  constructor(
+    @inject(AuthDatasource) private authDatasource: AuthDatasource,
+    @inject(PopupStatusDatasource)
+    private popupStatusDatasource: PopupStatusDatasource
+  ) {}
+  async changeStatus(data: PopupStatusDto, admin: ReqAdmin) {
+    try {
+      const { status } = data;
 
-        try {
+      const { id } = admin;
+      const userExist = await this.authDatasource.findById(id);
+      if (!userExist) throw new NotFoundError("User does not exist.");
 
-            const { status } = data
-
-            const { id } = admin
-            const userExist = await this.authDatasource.findById(id)
-            if(!userExist) throw new NotFoundError('User does not exist.')
-
-            return await this.popupStatusDatasource.changeStatus(status)
-            
-        } catch (error) {
-            throw error 
-        }
+      return await this.popupStatusDatasource.changeStatus(status);
+    } catch (error) {
+      throw error;
     }
+  }
 
+  async getStatus() {
+    try {
+      return await this.popupStatusDatasource.fetchStatusDetail();
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
-export default PopupStatusServices
+export default PopupStatusServices;

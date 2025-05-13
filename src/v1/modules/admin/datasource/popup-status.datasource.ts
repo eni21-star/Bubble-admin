@@ -1,15 +1,18 @@
-import { injectable } from "tsyringe"
-import AppDataSource from "../../../../database"
-import PopupStatus from "../../../../database/entities/popup-status.entities"
+import { injectable } from "tsyringe";
+import AppDataSource from "../../../../database";
+import PopupStatus from "../../../../database/entities/popup-status.entities";
 
-const popupStatusRepo = AppDataSource.getRepository(PopupStatus)
+const popupStatusRepo = AppDataSource.getRepository(PopupStatus);
 
 @injectable()
 class PopupStatusDatasource {
+  async changeStatus(status: boolean) {
+    return await popupStatusRepo.update({}, { isEnabled: status });
+  }
 
-    async changeStatus(status: boolean){
-        return await popupStatusRepo.update({}, {isEnabled: status})
-    }
+  async fetchStatusDetail() {
+    return await popupStatusRepo.findOne();
+  }
 }
 
-export default PopupStatusDatasource
+export default PopupStatusDatasource;
