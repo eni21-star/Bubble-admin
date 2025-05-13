@@ -18,9 +18,8 @@ class ProfileServices {
     }
   }
 
-  async deleteProfile(admin: ReqAdmin) {
+  async deleteProfile(id: string) {
     try {
-      const { id } = admin;
       const userExist = await this.authDatasource.findByIdProfile(id);
       if (!userExist) throw new NotFoundError("User does not exist.");
 
