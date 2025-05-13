@@ -5,7 +5,7 @@ import { reqValidator } from '../../../../shared/middleware/validation.middlewar
 import { CareersDto } from '../dto/careers.dto'
 const careerRoute = express.Router()
 import multer from 'multer';
-import { fileValidator } from '../../../../shared/utils/file-validator.utils'
+import { fileValidator } from '../../../../shared/middleware/file-validator.utils'
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage,  limits: { fileSize: 5 * 1024 * 1024 } });

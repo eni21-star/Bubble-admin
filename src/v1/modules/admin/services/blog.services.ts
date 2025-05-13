@@ -2,7 +2,7 @@ import { inject, injectable } from "tsyringe";
 import { ReqAdmin } from "../../../../shared/types/req.types";
 import { CreateBlogDto, UpdateeBlogDto } from "../dto/blog.dto";
 import { ForbiddenError, NotFoundError, UnauthorizedError } from "../../../../shared/errors/errors";
-import uploadImage from "../../../../shared/cloudinary/upload.cloudinary";
+import uploadImage from "../../../../shared/cloudinary/upload-image.cloudinary";
 import Blog from "../../../../database/entities/blog.entities";
 import Images from "../../../../database/entities/images.entities";
 import AuthDatasource from "../datasource/auth.datasource";
@@ -110,7 +110,23 @@ class BlogServices {
     async getBlogsBySubsidiary(subsidiary:  string){
         
         try {
-            return await this.blogDatasource.getBlogsBySubsidiary(subsidiary)
+            const getBlogs =  await this.blogDatasource.getBlogsBySubsidiary(subsidiary)
+          
+            return getBlogs.map((blog) => ({
+                content: blog.content,
+                createdAt: blog.createdAt,
+                createdBy: {
+                  id: blog.createdBy.id,
+                  email: blog.createdBy.email,
+                  username: blog.createdBy.username,
+                },
+                id: blog.id,
+                images: blog.images,
+                subsidiary: blog.subsidiary,
+                title: blog.title,
+                updatedAt: blog.updatedAt,
+              }));
+
         } catch (error) {
             throw error
         }

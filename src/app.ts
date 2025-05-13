@@ -21,6 +21,7 @@ import authRouter from "./v1/modules/admin/routes/auth.routes";
 import incidentRouter from "./v1/modules/public/routes/incidents.routes";
 import newTicketRouter from "./v1/modules/support/routes/support.routes";
 import connectedProfileRoute from "./v1/modules/admin/routes/connected-profiles.routes";
+import reportsRouter from "./v1/modules/admin/routes/reports.routes";
 const app: Application = express();
 
 app.use(express.json());
@@ -50,6 +51,7 @@ app.use(`/api/${RouteVersion.v1}`, subscribebRoute);
 app.use(`/api/${RouteVersion.v1}`, incidentRouter);
 app.use(`/api/${RouteVersion.v1}`, newTicketRouter);
 app.use(`/api/${RouteVersion.v1}`, connectedProfileRoute);
+app.use(`/api/${RouteVersion.v1}`, reportsRouter);
 
 app.use(errorHandler);
 export default app;
