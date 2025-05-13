@@ -19,9 +19,6 @@ popupStatusRouter
     ],
     popupStatusController.changeStatus.bind(popupStatusController)
   )
-  .get(
-    "/popup/status",
-    popupStatusController.getStatus.bind(popupStatusController)
-  );
+  .get("/popup", popupStatusController.getStatus.bind(popupStatusController));
 
 export default popupStatusRouter;
