@@ -14,6 +14,7 @@ profileRouter
   )
   .delete(
     "/profile/:id",
+    authMiddleware,
     profileController.deleteProfile.bind(profileController)
   );
 
