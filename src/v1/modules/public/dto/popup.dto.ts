@@ -1,4 +1,4 @@
-import { IsEmail, IsOptional, isString, IsString, Length } from "class-validator";
+import { IsBoolean, IsEmail, IsOptional, isString, IsString, Length } from "class-validator";
 
 
 
@@ -41,5 +41,9 @@ export class UpdatePopupDto {
     @IsString()
     @IsOptional()
     stateOfResidence?: string
+
+    @IsBoolean()
+    @IsOptional()
+    isEnabled?: boolean
 
 }

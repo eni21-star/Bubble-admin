@@ -82,7 +82,6 @@ class SupportController {
         try {
 
             const data = String(req.params.id)
-            console.log(data)
             if(!data.startsWith('TICKET')) throw new BadreqError('Ticket id is of invalid format.')
             const response = await this.supportService.getTicket(data)
             return res.status(200).json(SuccessResponse('Ticket Retrieved.', response))

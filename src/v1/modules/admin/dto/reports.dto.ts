@@ -1,4 +1,4 @@
-import { IsString, Length } from "class-validator";
+import { IsIn, IsString, Length } from "class-validator";
 
 
 export class ReportsDto {
@@ -11,4 +11,7 @@ export class ReportsDto {
     @Length(4,25)
     section!: string
 
+    @IsString()
+    @IsIn(['REPORTS', 'RESOURCES'])
+    type!: string
 }

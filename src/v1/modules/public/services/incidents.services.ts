@@ -18,7 +18,6 @@ class IncidentService {
             await sendIncidentReport(insuredName, policyNumber, description, file[0])
 
             const images = await uploadImage(file)
-            console.log(images)
             const newIncident = new Incidents()
             newIncident.description = description
             newIncident.insuredName = insuredName

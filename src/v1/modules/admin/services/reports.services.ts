@@ -18,7 +18,7 @@ class ReportsServices {
 
         try {
             
-            const { title, section } =  data
+            const { title, section, type } =  data
             const { id } = admin
             const userExist = await this.authDatasource.findById(id)
             if(!userExist) throw new NotFoundError('User does not exist.')
@@ -30,6 +30,7 @@ class ReportsServices {
             newReport.fileUrl = fileUrl[0].fileUrl
             newReport.title = title
             newReport.section = section
+            newReport.type = type
 
             const response =  await this.reportsDatasource.newReport(newReport)
             const { createdBy, ...rest } = response
@@ -40,7 +41,11 @@ class ReportsServices {
         }
     }
 
-    async deleteReport(reportId: string, admin: ReqAdmin){
+    async getReports(type: string, page: number, limit: number){
+        return await this.reportsDatasource.getReports(type, page, limit)
+    }
+
+    async deleteReport(reportId: string,  admin: ReqAdmin){
 
         try {
 
@@ -48,9 +53,8 @@ class ReportsServices {
             const userExist = await this.authDatasource.findById(id)
             if(!userExist) throw new NotFoundError('User does not exist.')
 
-            console.log(userExist.reports)
             const reportExist = await this.reportsDatasource.findReportById(reportId)
-            if(!reportExist)  throw new NotFoundError('Report does not exist.')
+            if(!reportExist)  throw new NotFoundError('Report or resource does not exist.')
 
             if(userExist.id !== reportExist.createdBy.id || userExist.role !== 'SUPERADMIN') throw new ForbiddenError('You are not permitted to do this.')
             
