@@ -29,7 +29,11 @@ class PopupStatusServices {
 
   async getStatus() {
     try {
-      return await this.popupStatusDatasource.fetchStatusDetail();
+      const popup = await this.popupStatusDatasource.fetchStatusDetail();
+
+      if (!popup) throw new NotFoundError("Error fetching popup status.");
+
+      return popup;
     } catch (error) {
       throw error;
     }
