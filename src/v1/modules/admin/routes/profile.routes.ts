@@ -1,14 +1,20 @@
-import express from 'express'
-import { container } from 'tsyringe'
-import ProfileController from '../controllers/profile.controllers'
-import { authMiddleware } from '../../../../shared/middleware/auth.middleware'
-const profileRouter = express.Router()
+import express from "express";
+import { container } from "tsyringe";
+import ProfileController from "../controllers/profile.controllers";
+import { authMiddleware } from "../../../../shared/middleware/auth.middleware";
+const profileRouter = express.Router();
 
-
-
-const profileController = container.resolve(ProfileController)
+const profileController = container.resolve(ProfileController);
 
 profileRouter
-.get('/profile', authMiddleware,profileController.getProfile.bind(profileController))
+  .get(
+    "/profile",
+    authMiddleware,
+    profileController.getProfile.bind(profileController)
+  )
+  .delete(
+    "/profile/:id",
+    profileController.deleteProfile.bind(profileController)
+  );
 
-export default profileRouter
+export default profileRouter;
