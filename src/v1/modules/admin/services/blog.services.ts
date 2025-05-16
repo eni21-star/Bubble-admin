@@ -63,7 +63,7 @@ class BlogServices {
               ) ?? false;
 
 
-            if(!userPermitted || userExist.role != 'SUPERADMIN') throw new ForbiddenError('You do not have permission to do this')
+            if(!userPermitted && userExist.role != 'SUPERADMIN') throw new ForbiddenError('You do not have permission to do this')
                
             let images: any = []
             if(file.length > 0){
@@ -148,7 +148,7 @@ class BlogServices {
                 (blog)=> blog.id === findBlog.id
             ) ?? false
 
-            if(!userPermitted || userExist.role != 'SUPERADMIN') throw new ForbiddenError('You do not have permission to do this.')
+            if(!userPermitted && userExist.role != 'SUPERADMIN') throw new ForbiddenError('You do not have permission to do this.')
 
             const deleteBlog = await this.blogDatasource.deleteBlog(id, findBlog)
             return { deleteBlog }

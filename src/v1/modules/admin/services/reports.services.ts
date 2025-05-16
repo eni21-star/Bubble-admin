@@ -56,7 +56,7 @@ class ReportsServices {
             const reportExist = await this.reportsDatasource.findReportById(reportId)
             if(!reportExist)  throw new NotFoundError('Report or resource does not exist.')
 
-            if(userExist.id !== reportExist.createdBy.id || userExist.role !== 'SUPERADMIN') throw new ForbiddenError('You are not permitted to do this.')
+            if(userExist.id !== reportExist.createdBy.id && userExist.role !== 'SUPERADMIN') throw new ForbiddenError('You are not permitted to do this.')
             
             return await this.reportsDatasource.deleteReport(reportId, userExist)
             
