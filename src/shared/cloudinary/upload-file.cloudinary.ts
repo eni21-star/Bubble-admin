@@ -26,8 +26,11 @@ async function uploadFile(file: Express.Multer.File[]) {
       
             stream.pipe(uploadStream);
           });
-      
-          fileData.push({ fileUrl: result.secure_url });
+
+          fileData.push({
+            fileUrl: result.secure_url
+          });
+          
 
     }
 

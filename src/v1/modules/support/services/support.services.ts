@@ -138,7 +138,7 @@ class SupportService {
         
             const snapshot = await firebaseDB.ref(`supportChats/${ticketId}`).once('value')
             if(!snapshot) throw new NotFoundError('Ticket does not exist')
-            const rawMessages = snapshot.val().messages
+            const rawMessages = snapshot.val()//.messages
 
             const data =  Object.entries(rawMessages)
              .sort(([, a], [, b]) => {return (a as any).timestamp - (b as any).timestamp})
@@ -149,7 +149,7 @@ class SupportService {
                };
              });
 
-            return data
+            return rawMessages
 
         } catch (error) {
             throw error
